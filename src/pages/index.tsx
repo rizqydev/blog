@@ -1,10 +1,10 @@
-import { getSortedPostsData } from "@/lib/post";
+import { getPostsPerPage, getSortedPostsData } from "@/lib/post";
 import "@/app/global.css";
-import Layout from "./layout"
-import Link from "next/link";
+import Layout from "@/components/Layout"
 import Post from "@/components/Post";
+import { PostProps } from "@/types/Post";
 
-export default function Home({ allPostsData, nextPage, allPages }) {
+export default function Home({ allPostsData, nextPage, allPages }: PostProps) {
   return (
     <Layout>
       <Post allPostsData={allPostsData} nextPage={nextPage} allPages={allPages} />
@@ -13,13 +13,17 @@ export default function Home({ allPostsData, nextPage, allPages }) {
 }
 
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+  const {
+    allPostsData,
+    nextPage,
+    allPages,
+  } = getPostsPerPage(1);
 
   return {
     props: {
       allPostsData,
-      nextPage: 2,
-      allPages: 2,
+      nextPage,
+      allPages,
     },
   };
 }

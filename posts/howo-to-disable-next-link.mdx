@@ -1,0 +1,17 @@
+---
+title: "How To Disable Next Link"
+date: "2023-12-16"
+categories: "nextjs,react"
+---
+
+```
+  <Link
+    href={`/page/${previousPage}`}
+    onClick={event => nextPage === 2 && event.preventDefault()}
+    className={`
+      w-28 rounded py-2 text-white flex justify-center
+      ${nextPage === 2 ? 'cursor-not-allowed bg-slate-400' : 'bg-slate-800 '}
+    `}>
+    Previous
+  </Link>
+```
