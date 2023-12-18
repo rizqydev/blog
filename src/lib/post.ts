@@ -60,7 +60,7 @@ export async function getPostData(id) {
 }
 
 
-export function getPostsPerPage(page: number) {
+export function getPostsPerPage(page: number, category?: string) {
   const fileNames = fs.readdirSync(postDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
@@ -70,10 +70,18 @@ export function getPostsPerPage(page: number) {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
+
+    const categories = matterResult.data.categories as string
+
+    if (category && categories.indexOf(category) === -1) {
+      return false
+    }
+
     return {
       id, ...matterResult.data,
+      categories: categories.split(","),
     };
-  });
+  }).filter((val) => val !== false);
 
   const sortedPostData = allPostData.sort((a, b) => {
     // @ts-ignore

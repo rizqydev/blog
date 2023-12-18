@@ -2,6 +2,7 @@ export type Post = {
   id: number,
   date: string,
   title: string,
+  categories: string[],
   source?: any,
 }
 
