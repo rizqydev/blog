@@ -12,10 +12,11 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)"],
         salsa: ["var(--font-salsa)"],
-        ['noto-serif']: ["var(--font-noto-serif)"],
+        ["noto-serif"]: ["var(--font-noto-serif)"],
+        ["noto-color-emoji"]: ["var(--font-noto-color-emoji)"],
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };
 export default config;

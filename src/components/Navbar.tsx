@@ -1,16 +1,33 @@
 import Link from "next/link";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
+import { useState } from "react";
 
 export default function Navbar() {
+  const [darkMode, setDarkMode] = useState(false)
+
   return (
     <div className="flex justify-center border-b">
-      <ul className="flex gap-4 py-4 md:w-[850px]">
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/about">About</Link>
-        </li>
-      </ul>
+      <div className="flex justify-between md:w-[850px] py-4">
+        <ul className="flex gap-4">
+          <li className="w-20">
+            <Link href="/">Home</Link>
+          </li>
+          <li className="w-20">
+            <Link href="/about">About</Link>
+          </li>
+          <li className="w-20">
+            <Link href="/portofolio">Portofolio</Link>
+          </li>
+        </ul>
+        <button onClick={() => setDarkMode(!darkMode)}>
+          {
+            darkMode ? (
+              <MoonIcon className="h-6" />
+            ) : <SunIcon className="h-6" />
+          }
+
+        </button>
+      </div>
     </div>
   );
 }

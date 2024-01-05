@@ -1,5 +1,12 @@
 import { PostProps } from "@/types/Post";
 import Link from "next/link";
+import "./../../public/theme.css" // theme for pre
+
+function parseDate(dateValue: string) {
+  const objDate = new Date(dateValue)
+
+  return `${objDate.getMonth() + 1}/${objDate.getDate()}/${objDate.getFullYear()}`
+}
 
 export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
   const previousPage = nextPage === 2 ? 1 : nextPage - 2
@@ -14,12 +21,12 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
         >
           <div className="flex justify-between ">
             <Link
-              href={`/post/${post.id}`}
+              href={`/blog/${post.id}`}
               className="text-lg font-medium text-black/80 hover:underline transition ease-out delay-100"
             >
               {post.title}
             </Link>
-            <p className="text-sm text-black/60">{post.date}</p>
+            <p className="text-sm text-black/60">{parseDate(post.date)}</p>
           </div>
           <div className="mt-2 flex gap-2">
             {post.categories.map((category, key) => {

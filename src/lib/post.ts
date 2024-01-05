@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
+import remarkPrism from "remark-prism";
 
 const postDirectory = path.join(process.cwd(), "posts");
 
@@ -42,14 +43,19 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: number) {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
 
-  const mdxSource = await serialize(matterResult.content)
+  const mdxSource = await serialize(matterResult.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkPrism]
+    },
+    parseFrontmatter: false
+  })
 
   return {
     id,

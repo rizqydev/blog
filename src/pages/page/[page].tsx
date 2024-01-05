@@ -6,9 +6,7 @@ import { PostProps } from "@/types/Post";
 
 export default function Page({ allPostsData, nextPage, allPages }: PostProps) {
   return (
-    <Layout>
-      <Post allPostsData={allPostsData} nextPage={nextPage} allPages={allPages} />
-    </Layout>
+    <Post allPostsData={allPostsData} nextPage={nextPage} allPages={allPages} />
   )
 }
 
