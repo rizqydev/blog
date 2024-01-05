@@ -13,7 +13,7 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
   const nextPostsPage = nextPage > allPages ? allPages : nextPage
   return (
     <>
-      <h1 className="mb-8 text-5xl font-bold">Blog</h1>
+      <h1 className="mb-8 text-5xl font-bold dark:text-slate-500 text-black/80">Blog</h1>
       {allPostsData && allPostsData.map((post, key) => (
         <div
           key={key}
@@ -26,19 +26,23 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
             >
               {post.title}
             </Link>
-            <p className="text-sm dark:text-slate-400 text-black/60">{parseDate(post.date)}</p>
+            <p className="hidden md:block text-sm dark:text-slate-400 text-black/60">{parseDate(post.date)}</p>
           </div>
-          <div className="mt-2 flex gap-2">
-            {post.categories.map((category, key) => {
-              if (category) {
-                return (
-                  <Link
-                    key={key}
-                    href={`/category/${category}`}
-                    className="bg-slate-500 rounded px-3 py-1 text-xs text-white">{category}</Link>
-                )
-              }
-            })}
+          <div className="mt-2 flex justify-between">
+            <div className="flex gap-2">
+              {post.categories.map((category, key) => {
+                if (category) {
+                  return (
+                    <Link
+                      key={key}
+                      href={`/category/${category}`}
+                      className="bg-slate-500 rounded px-3 py-1 text-xs text-white">{category}</Link>
+                  )
+                }
+              })}
+            </div>
+
+            <p className="block md:hidden text-sm dark:text-slate-400 text-black/60">{parseDate(post.date)}</p>
           </div>
         </div>
       ))}

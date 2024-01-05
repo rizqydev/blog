@@ -7,7 +7,7 @@ import { Post } from "@/types/Post";
 export default function Post({ postData }: { postData: Post }) {
   return (
     <>
-      <h1 className="font-bold text-2xl mb-4">{postData.title}</h1>
+      <h1 className="font-bold text-2xl mb-4 dark:text-slate-300">{postData.title}</h1>
       <div className="font-inter leading-6 text-justify prose dark:prose-h2:text-slate-400 dark:prose-p:text-slate-300 dark:prose-code:text-slate-200">
         <MDXRemote {...postData.source} />
       </div>
