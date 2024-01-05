@@ -17,13 +17,13 @@ const salsa = Salsa({
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className={`${inter.className} ${salsa.variable} ${notoSerif.variable} ${notoColorEmoji.variable} flex flex-col min-h-screen`}
+      className={`${inter.className} ${salsa.variable} ${notoSerif.variable} ${notoColorEmoji.variable} flex flex-col min-h-screen dark:bg-slate-800 dark:text-slate-400`}
     >
       <Head>
         <title>Rizqy Blog</title>
       </Head>
       <Navbar />
-      <div className="flex justify-center py-8">
+      <div className="flex justify-center py-8 ">
         <div className="md:w-[850px]">
           {children}
         </div>

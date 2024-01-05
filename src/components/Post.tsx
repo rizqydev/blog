@@ -17,16 +17,16 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
       {allPostsData && allPostsData.map((post, key) => (
         <div
           key={key}
-          className="flex flex-col border-b py-4 hover:-mx-4 hover:bg-gray-100 hover:px-4"
+          className="flex flex-col border-b py-4 hover:-mx-4 hover:bg-gray-100 hover:px-4 dark:hover:bg-slate-700"
         >
           <div className="flex justify-between ">
             <Link
               href={`/blog/${post.id}`}
-              className="text-lg font-medium text-black/80 hover:underline transition ease-out delay-100"
+              className="text-lg font-medium dark:text-slate-200 text-black/80 hover:underline transition ease-out delay-100"
             >
               {post.title}
             </Link>
-            <p className="text-sm text-black/60">{parseDate(post.date)}</p>
+            <p className="text-sm dark:text-slate-400 text-black/60">{parseDate(post.date)}</p>
           </div>
           <div className="mt-2 flex gap-2">
             {post.categories.map((category, key) => {

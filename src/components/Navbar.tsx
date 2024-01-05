@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className="flex justify-center border-b">
       <div className="flex justify-between md:w-[850px] py-4">
-        <ul className="flex gap-4">
+        <ul className="flex gap-4 font-bold text-black/80 dark:text-slate-400">
           <li className="w-20">
             <Link href="/">Home</Link>
           </li>
@@ -19,7 +19,10 @@ export default function Navbar() {
             <Link href="/portofolio">Portofolio</Link>
           </li>
         </ul>
-        <button onClick={() => setDarkMode(!darkMode)}>
+        <button onClick={() => {
+          setDarkMode(!darkMode)
+          document.body.classList.toggle("dark")
+        }}>
           {
             darkMode ? (
               <MoonIcon className="h-6" />
