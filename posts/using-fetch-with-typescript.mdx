@@ -1,0 +1,41 @@
+---
+title: "Using fetch with Typescript"
+date: "2024-02-26"
+categories: "typescript"
+---
+
+```typescript
+async function fetchApi<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  if (res.ok) {
+    return res.json() as Promise<T>;
+  }
+  throw new Error(res.statusText);
+}
+```
+
+```typescript
+interface Product {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
+}
+
+async function consumeApi() {
+  const result = await fetchApi<Product[]>("https://dummyjson.com/products");
+
+  console.log(result);
+}
+
+consumeApi();
+```
+
+source: https://stackoverflow.com/questions/41103360/how-to-use-fetch-in-typescript

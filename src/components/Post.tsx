@@ -13,7 +13,7 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
   const nextPostsPage = nextPage > allPages ? allPages : nextPage
   return (
     <>
-      <h1 className="mb-8 text-5xl font-bold dark:text-slate-500 text-black/80">Blog</h1>
+      <h1 className="mb-8 text-4xl font-bold dark:text-slate-500 text-black/70 text-center">All Posts</h1>
       {allPostsData && allPostsData.map((post, key) => (
         <div
           key={key}
