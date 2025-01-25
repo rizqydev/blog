@@ -1,0 +1,68 @@
+---
+title: "Rounding Numbers in Javascript"
+date: "2024-09-24"
+categories: "javascript"
+---
+
+In javascript you can manipulate numbers by rounding them to the nearest integer using several functions. Below are some functions along with the explanations:
+
+1. `Math.round()`
+- **Purpose:** Rounds a number to the nearest integer.
+- **Behavior:** Rounds up if the decimal part is 0.5 or greater, and down if it is less than 0.5.
+
+**Example:**
+```javascript
+Math.round(4.5);    // returns 5
+Math.round(4.6);    // returns 5
+Math.round(4.4);    // returns 4
+Math.round(-4.4);    // returns -4
+```
+
+2. `Math.ceil()`
+- **Purpose:** Rounds a number **upwards** to the nearest integer.
+- **Behavior:** Always rounds up, regardless of whether the number is positive or negative.
+
+**Example:**
+```javascript
+Math.ceil(4.2);    // returns 5
+Math.ceil(-4.4);    // returns -4
+Math.ceil(-7.8);    // returns -7
+```
+
+3. `Math.floor()`
+- **Purpose:** Rounds a number **downwards** to the nearest integer.
+- **Behavior:** Always rounds **down**, regardless of whether the number is positive or negative.
+
+**Example:**
+```javascript
+Math.floor(4.7);    // returns 4
+Math.floor(-4.4);    // returns -5
+Math.floor(-7.8);    // returns -8
+Math.floor(7.8);    // returns 7
+```
+
+4. `Math.trunc()`
+- **Purpose:** Truncates (removes) the decimal parts of the number, returning just the integer part.
+- **Behavior:** Simply discards anything after the decimal without rounding.
+
+**Example:**
+```javascript
+Math.trunc(4.7);    // returns 4
+Math.trunc(-4.4);    // returns -4
+Math.trunc(-7.8);    // returns -7
+Math.trunc(7.8);    // returns 7
+```
+
+
+## Summary of Behaviour:
+
+| Function     | Description   | Example Input | Output |
+| ----  | ----| ------- | ------ |
+| `Math.round` | Rounds up to the nearest integer | `4.2` | `5` |
+|  |  | `-4.2` | `-4` |
+| `Math.ceil` | Rounds up to the next integer | `4.2` | `5` |
+|  |  | `-4.2` | `-4` |
+| `Math.floor` | Rounds a number downwards to the nearest integer | `4.2` | `5` |
+|  |  | `-4.2` | `-4` |
+| `Math.trunc` |  Truncates (removes) the decimal parts of the number, returning just the integer part. | `4.2` | `5` |
+|  |  | `-4.2` | `-4` |

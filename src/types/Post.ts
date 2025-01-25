@@ -4,6 +4,7 @@ export type Post = {
   title: string,
   categories: string[],
   source?: any,
+  isDraft?: boolean,
 }
 
 export type PostProps = {

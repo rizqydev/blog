@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
-import remarkPrism from "remark-prism";
+// import remarkPrism from "remark-prism";
+import rehypeMdxCodeProps from "rehype-mdx-code-props"
+import remarkGfm from "remark-gfm"
 
 const postDirectory = path.join(process.cwd(), "posts");
 
@@ -52,7 +54,8 @@ export async function getPostData(id: number) {
 
   const mdxSource = await serialize(matterResult.content, {
     mdxOptions: {
-      remarkPlugins: [remarkPrism]
+      remarkPlugins: [remarkGfm],
+      // rehypePlugins: [rehypeMdxCodeProps],
     },
     parseFrontmatter: false
   })
@@ -78,8 +81,10 @@ export function getPostsPerPage(page: number, category?: string) {
     const matterResult = matter(fileContents);
 
     const categories = matterResult.data.categories as string
+    const isDraft = matterResult.data.isDraft as boolean
+    // const isDraft = false
 
-    if (category && categories.indexOf(category) === -1) {
+    if ((category && categories.indexOf(category) === -1) || isDraft) {
       return false
     }
 
