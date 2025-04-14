@@ -1,6 +1,7 @@
 import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
 import createMDX from '@next/mdx'
+import remarkPrism from "remark-prism"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -12,7 +13,7 @@ const nextConfig = {
 const withMDX = createMDX({
   // Add markdown plugins here, as desired
   options: {
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkGfm, remarkPrism],
     rehypePlugins: [rehypeMdxCodeProps],
   },
 })

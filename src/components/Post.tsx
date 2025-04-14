@@ -1,6 +1,6 @@
 import { PostProps } from "@/types/Post";
 import Link from "next/link";
-import "./../../public/theme.css" // theme for pre
+// import "./../../public/theme.css" // theme for pre
 
 function parseDate(dateValue: string) {
   const objDate = new Date(dateValue)
