@@ -1,10 +1,11 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import matter, { language } from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 // import remarkPrism from "remark-prism";
 import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
+import rehypeHighlight from "rehype-highlight"
 
 const postDirectory = path.join(process.cwd(), "posts");
 
@@ -37,15 +38,15 @@ export function getAllPostIds() {
   const fileNames = fs.readdirSync(postDirectory);
 
   return fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
 
     return {
-      params: { id },
+      params: { slug },
     };
   });
 }
 
-export async function getPostData(id: number) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
@@ -55,7 +56,7 @@ export async function getPostData(id: number) {
   const mdxSource = await serialize(matterResult.content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      // rehypePlugins: [rehypeMdxCodeProps],
+      rehypePlugins: [rehypeHighlight],
     },
     parseFrontmatter: false
   })
@@ -63,8 +64,8 @@ export async function getPostData(id: number) {
   return {
     id,
     contentHtml: matterResult.content,
+    source: mdxSource,
     ...matterResult.data,
-    source: mdxSource
   };
 }
 

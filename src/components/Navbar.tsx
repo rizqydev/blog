@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid"
 import { useState } from "react";

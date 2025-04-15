@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import '@/styles/github-dark.css'
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -15,7 +16,9 @@ export function getAllPostsData() {
 
     const matterResult = matter(fileContents);
     return {
-      id, ...matterResult.data,
+      id, 
+      ...matterResult.data,
+      categories: matterResult.data.categories ? matterResult.data.categories.split(",") : [],
     };
   });
 
