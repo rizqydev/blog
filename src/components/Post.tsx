@@ -30,16 +30,18 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
           </div>
           <div className="mt-2 flex justify-between">
             <div className="flex gap-2">
-              {post.categories.map((category, key) => {
-                if (category) {
-                  return (
-                    <Link
-                      key={key}
-                      href={`/category/${category}`}
-                      className="bg-slate-500 rounded px-3 py-1 text-xs text-white">{category}</Link>
-                  )
-                }
-              })}
+              {
+                // post.categories.map((category, key) => {
+                //   if (category) {
+                //     return (
+                //       <Link
+                //         key={key}
+                //         href={`/category/${category}`}
+                //         className="bg-slate-500 rounded px-3 py-1 text-xs text-white">{category}</Link>
+                //     )
+                //   }
+                // })
+              }
             </div>
 
             <p className="block md:hidden text-sm dark:text-slate-400 text-black/60">{parseDate(post.date)}</p>
