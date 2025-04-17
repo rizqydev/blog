@@ -6,7 +6,7 @@ import { Post, PostProps } from "@/types/Post";
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
-export function getAllPostsPerPage(page: number): PostProps {
+export function getAllPostsPerPage(page: number, category?: string): PostProps {
   const fileNames = fs.readdirSync(postsDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
@@ -36,13 +36,31 @@ export function getAllPostsPerPage(page: number): PostProps {
     }
   });
 
-   const allPages = Math.ceil(sortedPostData.length / 10)
+
 
   const start = (page - 1) * 10
   const end = page * 10
 
+  let allPostsData = []
+let allPages = 0
+  if (category) {
+    const filteredPosts = sortedPostData.filter((post) => { 
+      return post.categories.includes(category)
+    })
+
+    allPostsData = filteredPosts.slice(start, end)
+
+
+    allPages = Math.ceil(filteredPosts.length / 10)
+  } else {
+    allPostsData = sortedPostData.slice(start, end)
+
+    allPages = Math.ceil(sortedPostData.length / 10)
+  }
+
+
   return {
-    allPostsData: sortedPostData.slice(start, end),
+    allPostsData,
     allPages,
     nextPage: page + 1
   }

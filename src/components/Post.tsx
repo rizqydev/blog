@@ -8,9 +8,13 @@ function parseDate(dateValue: string) {
   return `${objDate.getMonth() + 1}/${objDate.getDate()}/${objDate.getFullYear()}`
 }
 
-export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
+export default function Post({ allPostsData, nextPage, allPages, category }: PostProps) {
   const previousPage = nextPage === 2 ? 1 : nextPage - 2
   const nextPostsPage = nextPage > allPages ? allPages : nextPage
+
+  const previousLink =  category ? `/page/${previousPage}/category/${category}` : `/page/${previousPage}`
+  const nextLink =  category ? `/page/${nextPostsPage}/category/${category}` : `/page/${nextPostsPage}`
+
   return (
     <>
       <h1 className="mb-8 text-4xl font-bold dark:text-slate-500 text-black/70 text-center">All Posts</h1>
@@ -36,7 +40,7 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
                     return (
                       <Link
                         key={key}
-                        href={`/category/${category}`}
+                        href={`/page/1/category/${category}`}
                         className="bg-slate-500 rounded px-3 py-1 text-xs text-white">{category}</Link>
                     )
                   }
@@ -53,7 +57,7 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
         allPages > 1 && (
           <div className="mt-8 flex justify-end gap-5">
             <Link
-              href={`/page/${previousPage}`}
+              href={previousLink}
               onClick={event => nextPage === 2 && event.preventDefault()}
               className={`
             w-28 rounded py-2 text-white flex justify-center
@@ -62,7 +66,7 @@ export default function Post({ allPostsData, nextPage, allPages }: PostProps) {
               Previous
             </Link>
             <Link
-              href={`/page/${nextPostsPage}`}
+              href={nextLink}
               onClick={event => nextPage > allPages && event.preventDefault()}
               className={`
             w-28 rounded py-2 text-white flex justify-center

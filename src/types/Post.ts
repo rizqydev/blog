@@ -11,6 +11,7 @@ export type PostProps = {
   allPostsData: Post[],
   nextPage: number,
   allPages: number,
+  category?: string,
 }
 
 
