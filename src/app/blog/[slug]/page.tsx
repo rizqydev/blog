@@ -1,5 +1,4 @@
 import "@/app/global.css";
-// import "../../public/prism.css" // theme for pre
 import "@/../public/prism.css"
 
 import { getAllPostIds, getPostData } from "@/lib/post";
@@ -23,19 +22,13 @@ const options = {
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
-  // @ts-ignore
-  const postData: Post = await getPostData(slug);
-
-  // console.log("slug", postData);
+  const postData = await getPostData(slug);
 
   return (
     <>
       <h1 className="font-bold text-2xl mb-4 dark:text-slate-300">{postData.title}</h1>
       <div className="prose prose-slate dark:prose-p:text-slate-300 dark:prose-pre:bg-slate-500 dark:prose-code:text-slate-200 dark:prose-li:text-slate-300 dark:prose-strong:text-slate-300">
-          {/* source={postData.source} scope={undefined} frontmatter={undefined} */}
-          {/* {...postData.source} */}
         <MDXRemote
-          // @ts-ignore
           source={postData.contentHtml}
           // @ts-ignore
           options={options}
@@ -44,12 +37,3 @@ export default async function PostPage({ params }: { params: { slug: string } })
     </>
   );
 }
-
-
-// export async function getStaticProps({ params }: { params: { id: number } }) {
-//   const postData = await getPostData(params.id);
-
-//   return {
-//     props: { postData },
-//   };
-// }

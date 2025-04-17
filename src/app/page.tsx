@@ -1,14 +1,11 @@
 import Post from "@/components/Post";
-import { getAllPostsData } from "@/lib/blog-posts";
-import { PostProps } from "@/types/Post";
+import { getAllPostsPerPage } from "@/lib/blog-posts";
 
 export default function Home() {
-  const allPostsData = getAllPostsData()
-  const nextPage = 1
-  const allPages = 1
+  const { allPostsData, nextPage, allPages } = getAllPostsPerPage(1)
+  
 
   return (
-    // @ts-ignore
     <Post allPostsData={allPostsData} nextPage={nextPage} allPages={allPages} />
   );
 }

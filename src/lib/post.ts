@@ -65,6 +65,7 @@ export async function getPostData(id: string) {
     id,
     contentHtml: matterResult.content,
     source: mdxSource,
+    title: matterResult.data.title,
     ...matterResult.data,
   };
 }

@@ -34,12 +34,10 @@ export default function Portofolio() {
   }
   ]
 
-  // 
-
   return <div className="flex md:flex-wrap md:justify-between md:gap-0 justify-center gap-2">
     {
-      cards.map(card => (
-        <div className="rounded-lg cursor-pointer mb-8 w-[240px] shadow-md shadow-gray-400 hover:scale-105 delay-75 transition ease-in-out">
+      cards.map((card, key) => (
+        <div key={key} className="rounded-lg cursor-pointer mb-8 w-[240px] shadow-md shadow-gray-400 hover:scale-105 delay-75 transition ease-in-out">
           <Image src={card.image} alt={card.title} width="240" height="80" className="w-[240px] h-[160px] rounded-t-lg" />
           <p className="font-bold border-t text-center shadow-sm text-sm text-slate-600 py-2">{card.title}</p>
         </div>
