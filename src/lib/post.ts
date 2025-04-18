@@ -2,8 +2,6 @@ import fs from "fs";
 import path from "path";
 import matter, { language } from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
-// import remarkPrism from "remark-prism";
-import rehypeMdxCodeProps from "rehype-mdx-code-props"
 import remarkGfm from "remark-gfm"
 import rehypeHighlight from "rehype-highlight"
 
@@ -65,7 +63,7 @@ export async function getPostData(id: string) {
     id,
     contentHtml: matterResult.content,
     source: mdxSource,
-    title: matterResult.data.title,
+    title: matterResult.data.title as string,
     ...matterResult.data,
   };
 }
@@ -115,4 +113,15 @@ export function getPostsPerPage(page: number, category?: string) {
     allPages,
     nextPage: page + 1
   }
+}
+
+
+export function getPostTitle(id: string): string {
+  const fullPath = path.join(postDirectory, `${id}.mdx`);
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  const matterResult = matter(fileContents);
+
+  return matterResult.data.title as string
 }

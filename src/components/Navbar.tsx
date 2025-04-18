@@ -9,14 +9,14 @@ export default function Navbar() {
   return (
     <div className="border-b md:px-0 px-4">
       <div className="flex justify-between md:w-[850px] mx-auto py-4">
-        <ul className="flex gap-4 font-semibold text-black/70 dark:text-slate-400">
-          <li className="w-20">
+        <ul className="flex gap-8 font-semibold text-black/70 dark:text-slate-400">
+          <li>
             <Link href="/">Home</Link>
           </li>
-          <li className="w-20">
-            <Link href="/about">About</Link>
+          <li>
+            <Link href="/about">About Me</Link>
           </li>
-          <li className="w-20">
+          <li>
             <Link href="/portofolio">Portofolio</Link>
           </li>
         </ul>

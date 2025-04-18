@@ -1,9 +1,8 @@
 import "@/app/global.css";
 import "@/../public/prism.css"
 
-import { getAllPostIds, getPostData } from "@/lib/post";
+import { getAllPostIds, getPostData, getPostTitle } from "@/lib/post";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { Post } from "@/types/Post";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
@@ -11,6 +10,16 @@ export function generateStaticParams() {
   const paths = getAllPostIds();
 
   return paths.map(({ params: { slug } }) => ({ slug }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
+  const title = getPostTitle(slug)
+
+  return {
+    title
+  }
 }
 
 const options = {
