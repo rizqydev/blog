@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import matter, { language } from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
+import matter from 'gray-matter';
+import { parseDate } from './utils';
 
 const postDirectory = path.join(process.cwd(), 'posts');
 
@@ -56,6 +54,7 @@ export async function getPostData(id: string) {
     id,
     contentHtml: matterResult.content,
     title: matterResult.data.title as string,
+    publishDate: parseDate(matterResult.data.date),
     ...matterResult.data,
   };
 }

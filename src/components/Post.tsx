@@ -1,12 +1,7 @@
 'use client';
+import { parseDate } from '@/lib/utils';
 import { PostProps } from '@/types/Post';
 import Link from 'next/link';
-
-function parseDate(dateValue: string) {
-  const objDate = new Date(dateValue);
-
-  return `${objDate.getMonth() + 1}/${objDate.getDate()}/${objDate.getFullYear()}`;
-}
 
 export default function Post({ allPostsData, nextPage, allPages, category }: PostProps) {
   const previousPage = nextPage === 2 ? 1 : nextPage - 2;
