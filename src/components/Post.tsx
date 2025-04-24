@@ -16,7 +16,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
 
   return (
     <>
-      <h1 className="mb-8 text-center text-4xl font-bold text-black/70 dark:text-slate-100">
+      <h1 className="mb-8 text-4xl font-bold text-black/70 dark:text-slate-100">
         All Posts {category && `with Tag '${category}' `}
       </h1>
       {allPostsData &&

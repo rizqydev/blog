@@ -16,7 +16,7 @@ export default function Portofolio() {
     },
     {
       id: 2,
-      title: 'This Blog',
+      title: "Rizqy's Blog",
       image: '/blog.png',
       description:
         'Gamification Academy is a platform that promotes and facilitates the development of gamified learning experiences for teachers and students.',
@@ -45,26 +45,31 @@ export default function Portofolio() {
   ];
 
   return (
-    <div className="flex justify-center gap-2 md:flex-wrap md:justify-between md:gap-0">
-      {cards.map((card, key) => (
-        <div
-          key={key}
-          className="mb-8 w-[240px] cursor-pointer rounded-lg shadow-md shadow-gray-400 transition delay-75 ease-in-out hover:scale-105"
-        >
-          <Image
-            src={card.image}
-            alt={card.title}
-            width="240"
-            height="80"
-            className="h-[160px] w-[240px] rounded-t-lg"
-          />
-          <p className="border-t py-2 text-center text-sm font-bold text-slate-600 shadow-sm">
-            {card.title}
-          </p>
-        </div>
-      ))}
+    <>
+      <h1 className="mb-8 text-4xl font-bold text-black/70 dark:text-slate-100">
+        Projects
+      </h1>
+      <div className="flex justify-center gap-2 md:flex-wrap md:justify-between md:gap-0">
+        {cards.map((card, key) => (
+          <div
+            key={key}
+            className="mb-8 w-[240px] cursor-pointer shadow-sm shadow-gray-300 transition delay-75 ease-in-out hover:scale-105"
+          >
+            <Image
+              src={card.image}
+              alt={card.title}
+              width="240"
+              height="80"
+              className="h-[160px] w-[240px]"
+            />
+            <p className="border-t py-2 text-center text-sm font-bold text-slate-800 dark:text-slate-100">
+              {card.title}
+            </p>
+          </div>
+        ))}
 
-      {cards && cards.length % 2 === 1 && <div className="w-[240px]"></div>}
-    </div>
+        {cards && cards.length % 2 === 1 && <div className="w-[240px]"></div>}
+      </div>
+    </>
   );
 }
