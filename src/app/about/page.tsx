@@ -1,16 +1,15 @@
 export const metadata = {
   title: 'About Me',
-}
+};
 
 export default function About() {
   return (
     <div>
-      <h1 className="text-3xl">
-        Hi, I&apos;m Rizqy 👋
-      </h1>
+      <h1 className="text-3xl">Hi, I&apos;m Rizqy 👋</h1>
       <p className="mt-4 text-lg text-slate-500">
-        Thank you for visiting my blog. I&apos;m interested in programming and I can&apos;t believe I&apos;ve been working in this field for more than 6 years.
+        Thank you for visiting my blog. I&apos;m interested in programming and I can&apos;t believe
+        I&apos;ve been working in this field for more than 6 years.
       </p>
     </div>
-  )
+  );
 }

@@ -1,26 +1,26 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import '@/styles/github-dark.css'
-import { Post, PostProps } from "@/types/Post";
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import '@/styles/github-dark.css';
+import { Post, PostProps } from '@/types/Post';
 
-const postsDirectory = path.join(process.cwd(), "posts");
+const postsDirectory = path.join(process.cwd(), 'posts');
 
 export function getAllPostsPerPage(page: number, category?: string): PostProps {
   const fileNames = fs.readdirSync(postsDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const id = fileName.replace(/\.mdx$/, '');
 
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     const matterResult = matter(fileContents);
 
     return {
-      id, 
+      id,
       ...matterResult.data,
-      categories: matterResult.data.categories ? matterResult.data.categories.split(",") : [],
+      categories: matterResult.data.categories ? matterResult.data.categories.split(',') : [],
       date: matterResult.data.date,
       title: matterResult.data.title,
       source: matterResult.data.source,
@@ -36,32 +36,28 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
     }
   });
 
+  const start = (page - 1) * 10;
+  const end = page * 10;
 
-
-  const start = (page - 1) * 10
-  const end = page * 10
-
-  let allPostsData = []
-let allPages = 0
+  let allPostsData = [];
+  let allPages = 0;
   if (category) {
-    const filteredPosts = sortedPostData.filter((post) => { 
-      return post.categories.includes(category)
-    })
+    const filteredPosts = sortedPostData.filter((post) => {
+      return post.categories.includes(category);
+    });
 
-    allPostsData = filteredPosts.slice(start, end)
+    allPostsData = filteredPosts.slice(start, end);
 
-
-    allPages = Math.ceil(filteredPosts.length / 10)
+    allPages = Math.ceil(filteredPosts.length / 10);
   } else {
-    allPostsData = sortedPostData.slice(start, end)
+    allPostsData = sortedPostData.slice(start, end);
 
-    allPages = Math.ceil(sortedPostData.length / 10)
+    allPages = Math.ceil(sortedPostData.length / 10);
   }
-
 
   return {
     allPostsData,
     allPages,
-    nextPage: page + 1
-  }
+    nextPage: page + 1,
+  };
 }

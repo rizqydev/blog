@@ -1,24 +1,25 @@
-import fs from "fs";
-import path from "path";
-import matter, { language } from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
-import remarkGfm from "remark-gfm"
-import rehypeHighlight from "rehype-highlight"
+import fs from 'fs';
+import path from 'path';
+import matter, { language } from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
 
-const postDirectory = path.join(process.cwd(), "posts");
+const postDirectory = path.join(process.cwd(), 'posts');
 
 export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const id = fileName.replace(/\.mdx$/, '');
 
     const fullPath = path.join(postDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
 
     const matterResult = matter(fileContents);
     return {
-      id, ...matterResult.data,
+      id,
+      ...matterResult.data,
     };
   });
 
@@ -36,7 +37,7 @@ export function getAllPostIds() {
   const fileNames = fs.readdirSync(postDirectory);
 
   return fileNames.map((fileName: string) => {
-    const slug = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, '');
 
     return {
       params: { slug },
@@ -47,52 +48,56 @@ export function getAllPostIds() {
 export async function getPostData(id: string) {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
 
-  const mdxSource = await serialize(matterResult.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [rehypeHighlight],
-    },
-    parseFrontmatter: false
-  })
+  console.log("content", matterResult.content)
+
+  // const mdxSource = await serialize(matterResult.content, {
+  //   mdxOptions: {
+  //     remarkPlugins: [remarkGfm],
+  //     rehypePlugins: [rehypeHighlight],
+  //   },
+  //   parseFrontmatter: false,
+  // });
 
   return {
     id,
     contentHtml: matterResult.content,
-    source: mdxSource,
+    // source: mdxSource,
     title: matterResult.data.title as string,
     ...matterResult.data,
   };
 }
 
-
 export function getPostsPerPage(page: number, category?: string) {
   const fileNames = fs.readdirSync(postDirectory);
 
-  const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+  const allPostData = fileNames
+    .map((fileName: string) => {
+      const id = fileName.replace(/\.mdx$/, '');
 
-    const fullPath = path.join(postDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+      const fullPath = path.join(postDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-    const matterResult = matter(fileContents);
+      const matterResult = matter(fileContents);
 
-    const categories = matterResult.data.categories as string
-    const isDraft = matterResult.data.isDraft as boolean
-    // const isDraft = false
+      const categories = matterResult.data.categories as string;
+      const isDraft = matterResult.data.isDraft as boolean;
+      // const isDraft = false
 
-    if ((category && categories.indexOf(category) === -1) || isDraft) {
-      return false
-    }
+      if ((category && categories.indexOf(category) === -1) || isDraft) {
+        return false;
+      }
 
-    return {
-      id, ...matterResult.data,
-      categories: categories.split(","),
-    };
-  }).filter((val) => val !== false);
+      return {
+        id,
+        ...matterResult.data,
+        categories: categories.split(','),
+      };
+    })
+    .filter((val) => val !== false);
 
   const sortedPostData = allPostData.sort((a, b) => {
     // @ts-ignore
@@ -103,25 +108,24 @@ export function getPostsPerPage(page: number, category?: string) {
     }
   });
 
-  const allPages = Math.ceil(sortedPostData.length / 10)
+  const allPages = Math.ceil(sortedPostData.length / 10);
 
-  const start = (page - 1) * 10
-  const end = page * 10
+  const start = (page - 1) * 10;
+  const end = page * 10;
 
   return {
     allPostsData: sortedPostData.slice(start, end),
     allPages,
-    nextPage: page + 1
-  }
+    nextPage: page + 1,
+  };
 }
-
 
 export function getPostTitle(id: string): string {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
-  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   const matterResult = matter(fileContents);
 
-  return matterResult.data.title as string
+  return matterResult.data.title as string;
 }
