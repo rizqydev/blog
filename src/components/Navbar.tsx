@@ -1,7 +1,7 @@
-'use client';
-import Link from 'next/link';
-import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+"use client";
+import Link from "next/link";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 
 export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
@@ -23,7 +23,7 @@ export default function Navbar() {
         <button
           onClick={() => {
             setDarkMode(!darkMode);
-            document.body.classList.toggle('dark');
+            document.body.classList.toggle("dark");
           }}
         >
           {darkMode ? <MoonIcon className="h-6" /> : <SunIcon className="h-6" />}

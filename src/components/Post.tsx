@@ -1,7 +1,7 @@
-'use client';
-import { parseDate } from '@/lib/utils';
-import { PostProps } from '@/types/Post';
-import Link from 'next/link';
+"use client";
+import { parseDate } from "@/lib/utils";
+import { PostProps } from "@/types/Post";
+import Link from "next/link";
 
 export default function Post({ allPostsData, nextPage, allPages, category }: PostProps) {
   const previousPage = nextPage === 2 ? 1 : nextPage - 2;
@@ -68,7 +68,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
             onClick={(event) => nextPage === 2 && event.preventDefault()}
             className={`
             flex w-28 justify-center rounded py-2 text-white
-            ${nextPage === 2 ? 'cursor-not-allowed bg-slate-400' : 'bg-slate-800 '}
+            ${nextPage === 2 ? "cursor-not-allowed bg-slate-400" : "bg-slate-800 "}
           `}
           >
             Previous
@@ -78,7 +78,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
             onClick={(event) => nextPage > allPages && event.preventDefault()}
             className={`
             flex w-28 justify-center rounded py-2 text-white
-            ${nextPage > allPages ? 'cursor-not-allowed bg-slate-400' : 'bg-slate-800 '}
+            ${nextPage > allPages ? "cursor-not-allowed bg-slate-400" : "bg-slate-800 "}
           `}
           >
             Next

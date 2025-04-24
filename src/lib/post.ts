@@ -1,18 +1,18 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { parseDate } from './utils';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { parseDate } from "./utils";
 
-const postDirectory = path.join(process.cwd(), 'posts');
+const postDirectory = path.join(process.cwd(), "posts");
 
 export function getSortedPostsData() {
   const fileNames = fs.readdirSync(postDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, '');
+    const id = fileName.replace(/\.mdx$/, "");
 
     const fullPath = path.join(postDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
     return {
@@ -35,7 +35,7 @@ export function getAllPostIds() {
   const fileNames = fs.readdirSync(postDirectory);
 
   return fileNames.map((fileName: string) => {
-    const slug = fileName.replace(/\.mdx$/, '');
+    const slug = fileName.replace(/\.mdx$/, "");
 
     return {
       params: { slug },
@@ -46,7 +46,7 @@ export function getAllPostIds() {
 export async function getPostData(id: string) {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
 
@@ -64,10 +64,10 @@ export function getPostsPerPage(page: number, category?: string) {
 
   const allPostData = fileNames
     .map((fileName: string) => {
-      const id = fileName.replace(/\.mdx$/, '');
+      const id = fileName.replace(/\.mdx$/, "");
 
       const fullPath = path.join(postDirectory, fileName);
-      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
       const matterResult = matter(fileContents);
 
@@ -82,7 +82,7 @@ export function getPostsPerPage(page: number, category?: string) {
       return {
         id,
         ...matterResult.data,
-        categories: categories.split(','),
+        categories: categories.split(","),
       };
     })
     .filter((val) => val !== false);
@@ -111,7 +111,7 @@ export function getPostsPerPage(page: number, category?: string) {
 export function getPostTitle(id: string): string {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
 

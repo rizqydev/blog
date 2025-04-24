@@ -1,20 +1,20 @@
-import { Inter, Salsa, Noto_Color_Emoji, Noto_Serif } from 'next/font/google';
-import '@/app/global.css';
-import Navbar from '@/components/Navbar';
-import Footer from './Footer';
+import { Inter, Salsa, Noto_Color_Emoji, Noto_Serif } from "next/font/google";
+import "@/app/global.css";
+import Navbar from "@/components/Navbar";
+import Footer from "./Footer";
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter', preload: true });
-const notoSerif = Noto_Serif({ subsets: ['latin'], variable: '--font-noto-serif', preload: true });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", preload: true });
+const notoSerif = Noto_Serif({ subsets: ["latin"], variable: "--font-noto-serif", preload: true });
 const notoColorEmoji = Noto_Color_Emoji({
-  subsets: ['emoji'],
-  weight: '400',
-  variable: '--font-noto-color-emoji',
+  subsets: ["emoji"],
+  weight: "400",
+  variable: "--font-noto-color-emoji",
   preload: true,
 });
 const salsa = Salsa({
-  subsets: ['latin'],
-  variable: '--font-salsa',
-  weight: '400',
+  subsets: ["latin"],
+  variable: "--font-salsa",
+  weight: "400",
   preload: true,
 });
 

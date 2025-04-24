@@ -3,7 +3,7 @@ export default function Footer() {
     <div className="mt-auto border-t">
       <div className="mx-auto py-4 text-center text-sm md:w-[850px]">
         <p className="mb-1">
-          Created with ❤️ using <span className="font-bold">Next.js </span>&{' '}
+          Created with ❤️ using <span className="font-bold">Next.js </span>&{" "}
           <span className="font-bold">Tailwind CSS</span>
         </p>
       </div>

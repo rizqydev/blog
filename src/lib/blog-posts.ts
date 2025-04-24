@@ -1,26 +1,26 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import '@/styles/github-dark.css';
-import { Post, PostProps } from '@/types/Post';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import "@/styles/github-dark.css";
+import { Post, PostProps } from "@/types/Post";
 
-const postsDirectory = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), "posts");
 
 export function getAllPostsPerPage(page: number, category?: string): PostProps {
   const fileNames = fs.readdirSync(postsDirectory);
 
   const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, '');
+    const id = fileName.replace(/\.mdx$/, "");
 
     const fullPath = path.join(postsDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
 
     return {
       id,
       ...matterResult.data,
-      categories: matterResult.data.categories ? matterResult.data.categories.split(',') : [],
+      categories: matterResult.data.categories ? matterResult.data.categories.split(",") : [],
       date: matterResult.data.date,
       title: matterResult.data.title,
       source: matterResult.data.source,

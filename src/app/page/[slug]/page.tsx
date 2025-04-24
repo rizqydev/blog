@@ -1,5 +1,5 @@
-import Post from '@/components/Post';
-import { getAllPostsPerPage } from '@/lib/blog-posts';
+import Post from "@/components/Post";
+import { getAllPostsPerPage } from "@/lib/blog-posts";
 
 export default async function PostPerPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

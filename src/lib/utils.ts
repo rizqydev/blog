@@ -3,4 +3,3 @@ export function parseDate(dateValue: string) {
 
   return `${objDate.getMonth() + 1}/${objDate.getDate()}/${objDate.getFullYear()}`;
 }
-
