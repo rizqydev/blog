@@ -50,7 +50,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           prose-p:text-justify
           prose-slate dark:prose-h2:text-slate-200 prose-h4:dark:text-slate-100 dark:prose-p:text-slate-300 prose-a:dark:text-slate-100 dark:prose-strong:text-slate-300
           dark:prose-code:text-slate-200 
-          dark:prose-pre:bg-slate-500 
+          dark:prose-pre:bg-black/90
           dark:prose-li:text-slate-300
           dark:prose-tr:text-slate-300
           dark:prose-th:text-slate-300
