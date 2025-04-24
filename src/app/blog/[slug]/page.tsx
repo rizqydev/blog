@@ -1,5 +1,5 @@
 import { getAllPostIds, getPostData, getPostTitle } from '@/lib/post';
-// import { MDXRemote } from 'next-mdx-remote/rsc';
+import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 
@@ -26,7 +26,7 @@ const options = {
   },
 };
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const postData = await getPostData(slug);
 
@@ -37,20 +37,20 @@ export default async function PostPage({ params }: { params: { slug: string } })
       </h1>
       <div
         className="
-        prose-table:w-max-content prose 
-        prose-slate dark:prose-h2:text-slate-200 prose-h4:dark:text-slate-100 dark:prose-p:text-slate-300 prose-a:dark:text-slate-100 dark:prose-strong:text-slate-300
-      dark:prose-code:text-slate-200 
-        dark:prose-pre:bg-slate-500 
-      dark:prose-li:text-slate-300
-      dark:prose-tr:text-slate-300
-      dark:prose-th:text-slate-300
+          prose-table:w-max-content prose 
+          prose-slate dark:prose-h2:text-slate-200 prose-h4:dark:text-slate-100 dark:prose-p:text-slate-300 prose-a:dark:text-slate-100 dark:prose-strong:text-slate-300
+          dark:prose-code:text-slate-200 
+          dark:prose-pre:bg-slate-500 
+          dark:prose-li:text-slate-300
+          dark:prose-tr:text-slate-300
+          dark:prose-th:text-slate-300
       "
       >
-        {/* <MDXRemote
+        <MDXRemote
           source={postData.contentHtml}
           // @ts-ignore
           options={options}
-        /> */}
+        />
       </div>
     </>
   );

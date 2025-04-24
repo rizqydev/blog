@@ -52,20 +52,9 @@ export async function getPostData(id: string) {
 
   const matterResult = matter(fileContents);
 
-  console.log("content", matterResult.content)
-
-  // const mdxSource = await serialize(matterResult.content, {
-  //   mdxOptions: {
-  //     remarkPlugins: [remarkGfm],
-  //     rehypePlugins: [rehypeHighlight],
-  //   },
-  //   parseFrontmatter: false,
-  // });
-
   return {
     id,
     contentHtml: matterResult.content,
-    // source: mdxSource,
     title: matterResult.data.title as string,
     ...matterResult.data,
   };
