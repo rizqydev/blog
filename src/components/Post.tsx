@@ -23,7 +23,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
         allPostsData.map((post, key) => (
           <div
             key={key}
-            className="flex flex-col border-b py-4 hover:-mx-4 hover:bg-gray-100 hover:px-4 dark:hover:bg-slate-700"
+            className="flex flex-col border-b py-4 hover:-mx-4 hover:bg-gray-100 hover:px-4 dark:border-b-slate-500 dark:hover:bg-slate-700"
           >
             <div className="flex justify-between ">
               <Link

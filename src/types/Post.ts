@@ -19,4 +19,5 @@ export type Card = {
   title: string;
   image: string;
   description: string;
+  builtWith: string[];
 };

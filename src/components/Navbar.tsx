@@ -7,7 +7,7 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div className="border-b px-4 md:px-0">
+    <div className="border-b px-4 dark:border-slate-500 md:px-0">
       <div className="mx-auto flex justify-between py-4 md:w-[850px]">
         <ul className="flex gap-8 font-semibold text-black/70 dark:text-slate-100">
           <li>

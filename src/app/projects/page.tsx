@@ -2,41 +2,11 @@
 import Image from "next/image";
 import { useState } from "react";
 import type { Card } from "@/types/Post";
+import Modal from "@/components/Modal";
 
 // export const metadata = {
 //   title: "Projects",
 // };
-
-function Modal({
-  isOpen,
-  onClose,
-  children,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      className={`fixed inset-0 z-10 flex min-h-screen items-center justify-center overflow-y-auto p-4 transition-opacity duration-300 ${
-        isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-      }`}
-    >
-      <div className="flex min-h-screen items-center justify-center p-4">
-        <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div className="absolute inset-0 bg-gray-500 opacity-75" onClick={onClose}></div>
-        </div>
-        <div
-          className={`relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all duration-300 sm:w-full sm:max-w-lg ${
-            isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
-          }`}
-        >
-          <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">{children}</div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default function Portofolio() {
   const cards: Card[] = [
@@ -45,35 +15,40 @@ export default function Portofolio() {
       title: "SIMLABKAL",
       image: "/simlabkal.png",
       description:
-        "Simlabkal is a digital platform for promoting and facilitating the exchange of knowledge and skills among local communities.",
+        "Simlabkal is a web-based application used to manage the calibration ordering process from start to finish, including the ability to track the status of each order.",
+      builtWith: ["NuxtJs", "Tailwind CSS", "Hapi.JS", "PostgreSQL"],
     },
     {
       id: 2,
       title: "Rizqy's Blog",
       image: "/blog.png",
       description:
-        "Gamification Academy is a platform that promotes and facilitates the development of gamified learning experiences for teachers and students.",
+        "My Personal blog where I share my thoughts and experiences in the world of technology and programming.",
+      builtWith: ["Nextjs", "Tailwind CSS", "Typescript"],
     },
     {
       id: 3,
       title: "Landing Page MSE",
       image: "/mse.png",
       description:
-        "Learning Management System is a web-based application for managing courses, assessments, and student progress.",
+        "A landing page that showcases the features and services of MSE, a company that specializes in providing led lighting, solar panel and batery solution.",
+      builtWith: ["Nextjs", "Tailwind CSS", "Typescript"],
     },
     {
       id: 4,
       title: "Landing Page Saebos",
       image: "/saebos.png",
       description:
-        "Website is a digital platform for promoting and facilitating the exchange of knowledge and skills among local communities.",
+        "A landing page that showcases the features and services of Saebos, a company that specializes in providing medical u clip and some of medical equipment.",
+      builtWith: ["Nextjs", "Tailwind CSS", "Typescript"],
     },
     {
       id: 5,
       title: "Wedding Webiste",
       image: "/wedding.png",
       description:
-        "Website is a digital platform for promoting and facilitating the exchange of knowledge and skills among local communities.",
+        "A wedding website that I created from another website and I have given a little modification.",
+      builtWith: ["Nextjs", "Tailwind CSS", "Typescript"],
     },
   ];
 
@@ -92,7 +67,7 @@ export default function Portofolio() {
         {cards.map((card, key) => (
           <div
             key={key}
-            className="mb-8 w-[240px] cursor-pointer shadow-sm shadow-gray-400 transition delay-75 ease-in-out hover:scale-105"
+            className="mb-8 w-[240px] cursor-pointer shadow-sm shadow-gray-400 transition delay-75 ease-in-out hover:scale-105 dark:shadow-gray-500"
             onClick={openModal.bind(null, card)}
           >
             <Image
@@ -102,7 +77,7 @@ export default function Portofolio() {
               height="80"
               className="h-[160px] w-[240px]"
             />
-            <p className="border-t py-2 text-center text-sm font-bold text-slate-800 dark:text-slate-100">
+            <p className="py-2 text-center text-sm font-bold text-slate-800 dark:text-slate-100">
               {card.title}
             </p>
           </div>
@@ -114,17 +89,34 @@ export default function Portofolio() {
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         {cardSelected !== null && (
           <>
-            <h3 className="mb-4 text-lg font-bold">{cardSelected?.title}</h3>
-            <Image
-              src={cardSelected.image}
-              alt={cardSelected.title}
-              width="480"
-              height="320"
-              className="h-[320px] w-[480px]"
-            />
-            <p className="mt-4 text-sm text-slate-800 dark:text-slate-100">
-              {cardSelected.description}
-            </p>
+            <div className="h-[320px]">
+              <Image
+                src={cardSelected.image}
+                alt={cardSelected.title}
+                width={512}
+                height={320}
+                className="h-[320px]"
+              />
+            </div>
+            <div className="px-3 py-4 dark:bg-slate-800">
+              <h3 className="mb-2 text-lg font-bold text-slate-900 dark:text-slate-100">
+                {cardSelected?.title}
+              </h3>
+              <p className="mb-4 text-sm text-slate-800 dark:text-slate-100">
+                {cardSelected.description}
+              </p>
+              <div className="text-sm text-slate-800 dark:text-slate-100">
+                <span className="font-light text-opacity-70">Built with:&nbsp;</span>
+                {cardSelected?.builtWith.map((item, index) => (
+                  <span
+                    key={index}
+                    className="mr-1 rounded-md bg-slate-500 px-3 py-1 text-xs text-slate-50"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </>
         )}
       </Modal>

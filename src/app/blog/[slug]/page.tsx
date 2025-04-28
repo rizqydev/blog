@@ -37,7 +37,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </h1>
       <h2 className="mb-4 flex items-center gap-2 text-slate-700 dark:text-slate-200">
         <CalendarIcon className="w-5" />
-        <span>Posted on {postData.publishDate}</span>
+        <span className="text-sm">Posted on {postData.publishDate}</span>
       </h2>
       <div
         className="
