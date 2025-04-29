@@ -25,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     >
       <Navbar />
       <div className="flex justify-center py-8 ">
-        <div className="px-4 md:w-[850px] md:px-0">{children}</div>
+        <div className="w-full px-4 md:w-[850px] md:px-0">{children}</div>
       </div>
       <Footer />
     </div>
