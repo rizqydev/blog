@@ -16,7 +16,7 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
-
+    
     return {
       id,
       ...matterResult.data,
@@ -24,7 +24,7 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
       date: matterResult.data.date,
       title: matterResult.data.title,
       source: matterResult.data.source,
-      isDraft: matterResult.data.isDraft,
+      isDraft: process.env.environment === "production" ? matterResult.data.isDraft : false,
     };
   });
 
@@ -43,14 +43,18 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
   let allPages = 0;
   if (category) {
     const filteredPosts = sortedPostData.filter((post) => {
-      return post.categories.includes(category);
+      return post.categories.includes(category) && !post.isDraft;
     });
 
     allPostsData = filteredPosts.slice(start, end);
 
     allPages = Math.ceil(filteredPosts.length / 10);
   } else {
-    allPostsData = sortedPostData.slice(start, end);
+    const filteredPosts = sortedPostData.filter((post) => {
+      return !post.isDraft;
+    });
+
+    allPostsData = filteredPosts.slice(start, end);
 
     allPages = Math.ceil(sortedPostData.length / 10);
   }
