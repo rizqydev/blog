@@ -43,7 +43,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         className="
           prose 
           prose-slate
-          prose-p:w-[850px]
           prose-p:text-justify prose-table:w-max dark:prose-h2:text-slate-200 prose-h4:dark:text-slate-100 dark:prose-p:text-slate-300 prose-a:dark:text-slate-100
           dark:prose-strong:text-slate-300 
           dark:prose-code:text-slate-200
