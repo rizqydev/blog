@@ -1,10 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
-// import remarkPrism from "remark-prism";
-import rehypeMdxCodeProps from "rehype-mdx-code-props"
-import remarkGfm from "remark-gfm"
+import { parseDate } from "./utils";
 
 const postDirectory = path.join(process.cwd(), "posts");
 
@@ -19,7 +16,8 @@ export function getSortedPostsData() {
 
     const matterResult = matter(fileContents);
     return {
-      id, ...matterResult.data,
+      id,
+      ...matterResult.data,
     };
   });
 
@@ -37,62 +35,57 @@ export function getAllPostIds() {
   const fileNames = fs.readdirSync(postDirectory);
 
   return fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+    const slug = fileName.replace(/\.mdx$/, "");
 
     return {
-      params: { id },
+      params: { slug },
     };
   });
 }
 
-export async function getPostData(id: number) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postDirectory, `${id}.mdx`);
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
   const matterResult = matter(fileContents);
 
-  const mdxSource = await serialize(matterResult.content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm],
-      // rehypePlugins: [rehypeMdxCodeProps],
-    },
-    parseFrontmatter: false
-  })
-
   return {
     id,
     contentHtml: matterResult.content,
+    title: matterResult.data.title as string,
+    publishDate: parseDate(matterResult.data.date),
     ...matterResult.data,
-    source: mdxSource
   };
 }
-
 
 export function getPostsPerPage(page: number, category?: string) {
   const fileNames = fs.readdirSync(postDirectory);
 
-  const allPostData = fileNames.map((fileName: string) => {
-    const id = fileName.replace(/\.mdx$/, "");
+  const allPostData = fileNames
+    .map((fileName: string) => {
+      const id = fileName.replace(/\.mdx$/, "");
 
-    const fullPath = path.join(postDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
+      const fullPath = path.join(postDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    const matterResult = matter(fileContents);
+      const matterResult = matter(fileContents);
 
-    const categories = matterResult.data.categories as string
-    const isDraft = matterResult.data.isDraft as boolean
-    // const isDraft = false
+      const categories = matterResult.data.categories as string;
+      const isDraft = matterResult.data.isDraft as boolean;
+      // const isDraft = false
 
-    if ((category && categories.indexOf(category) === -1) || isDraft) {
-      return false
-    }
+      if ((category && categories.indexOf(category) === -1) || isDraft) {
+        return false;
+      }
 
-    return {
-      id, ...matterResult.data,
-      categories: categories.split(","),
-    };
-  }).filter((val) => val !== false);
+      return {
+        id,
+        ...matterResult.data,
+        categories: categories.split(","),
+      };
+    })
+    .filter((val) => val !== false);
 
   const sortedPostData = allPostData.sort((a, b) => {
     // @ts-ignore
@@ -103,14 +96,24 @@ export function getPostsPerPage(page: number, category?: string) {
     }
   });
 
-  const allPages = Math.ceil(sortedPostData.length / 10)
+  const allPages = Math.ceil(sortedPostData.length / 10);
 
-  const start = (page - 1) * 10
-  const end = page * 10
+  const start = (page - 1) * 10;
+  const end = page * 10;
 
   return {
     allPostsData: sortedPostData.slice(start, end),
     allPages,
-    nextPage: page + 1
-  }
+    nextPage: page + 1,
+  };
+}
+
+export function getPostTitle(id: string): string {
+  const fullPath = path.join(postDirectory, `${id}.mdx`);
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+
+  const matterResult = matter(fileContents);
+
+  return matterResult.data.title as string;
 }
