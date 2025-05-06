@@ -16,7 +16,7 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
     const fileContents = fs.readFileSync(fullPath, "utf8");
 
     const matterResult = matter(fileContents);
-    
+
     return {
       id,
       ...matterResult.data,
