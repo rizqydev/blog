@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <div className="border-b px-4 dark:border-slate-500 md:px-0">
       <div className="mx-auto flex justify-between py-4 md:w-[850px]">
-        <ul className="flex items-center gap-8  text-black/70 dark:text-slate-100">
+        <ul className="flex items-center gap-8  text-sm font-bold text-black/70 dark:text-slate-100">
           <li className="font-bold">
             <Link href="/" className="text-3xl">
               &lt;/rn&gt;

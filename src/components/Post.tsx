@@ -16,7 +16,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
 
   return (
     <>
-      <h1 className="mb-8 text-4xl font-bold text-black/70 dark:text-slate-100">
+      <h1 className="mb-6 text-3xl font-bold text-black/70 dark:text-slate-100">
         All Posts {category && `with Tag '${category}' `}
       </h1>
       {allPostsData &&
@@ -25,10 +25,10 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
             key={key}
             className="flex flex-col border-b py-4 hover:-mx-4 hover:bg-gray-100 hover:px-4 dark:border-b-slate-500 dark:hover:bg-slate-700"
           >
-            <div className="flex justify-between ">
+            <div className="flex justify-between">
               <Link
                 href={`/blog/${post.id}`}
-                className="text-lg font-medium text-black/80 transition delay-100 ease-out hover:underline dark:text-slate-200"
+                className="font-medium text-black/80 transition delay-100 ease-out hover:underline dark:text-slate-200"
               >
                 {post.title}
               </Link>

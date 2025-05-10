@@ -32,10 +32,10 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <>
-      <h1 className="mb-2 text-4xl font-bold text-slate-800 dark:text-slate-100">
+      <h1 className="mb-2 text-2xl font-bold text-slate-800 dark:text-slate-100 md:text-3xl">
         {postData.title}
       </h1>
-      <h2 className="mb-5 mt-2 flex items-center gap-2 text-slate-700 dark:text-slate-200">
+      <h2 className="mb-6 mt-2 flex items-center gap-2 text-slate-700 dark:text-slate-200">
         <CalendarIcon className="w-5" />
         <span className="text-sm">Posted on {postData.publishDate}</span>
       </h2>
