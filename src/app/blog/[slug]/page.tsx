@@ -1,3 +1,4 @@
+import Comment from "@/components/Comment";
 import { getAllPostIds, getPostData, getPostTitle } from "@/lib/post";
 import { CalendarIcon } from "@heroicons/react/24/solid";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -58,6 +59,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           options={options}
         />
       </div>
+
+      <Comment />
     </>
   );
 }
