@@ -1,0 +1,45 @@
+---
+title: "Setup Redis With Docker Compose"
+date: "2025-06-02"
+categories: "redis"
+---
+
+**Redis** is a popular in-memory database used world wide. Many developers use Redis in their projects; therefore, it's worthwhile to learn it. 
+In this article, we will learn how to install Redis using **Docker Compose**. I chose Docker Compose because the installation is very easy and work across various multiple operating systems. 
+
+## Step 1 Create a file named `docker-compose.yml`
+```yaml
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+```
+
+## Step 2: Run the Compose File
+In your terminal, we can input the command below:
+```bash
+docker-compose up -d 
+``` 
+This will pull Redis image (if not already available), create the container, and start in the background.
+
+## Step 3: Test the Redis container
+You can connect to Redis CLI:
+```bash
+docker exec -it redis redis-cli
+``` 
+
+
+
+
+
+
