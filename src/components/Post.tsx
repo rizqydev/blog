@@ -60,7 +60,7 @@ export default function Post({ allPostsData, nextPage, allPages, category }: Pos
             </div>
           </div>
         ))}
-      {!allPostsData || (allPostsData.length === 0 && <p>Tidak ada data</p>)}
+      {!allPostsData || (allPostsData.length === 0 && <p>There is no data</p>)}
       {allPages > 1 && (
         <div className="mt-8 flex justify-end gap-5">
           <Link

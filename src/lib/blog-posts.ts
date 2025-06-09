@@ -56,12 +56,14 @@ export function getAllPostsPerPage(page: number, category?: string): PostProps {
 
     allPostsData = filteredPosts.slice(start, end);
 
-    allPages = Math.ceil(sortedPostData.length / 10);
+    allPages = Math.ceil(filteredPosts.length / 10);
   }
+
+  const nextPage = page + 1 > allPages ? allPages : page + 1;
 
   return {
     allPostsData,
     allPages,
-    nextPage: page + 1,
+    nextPage,
   };
 }
