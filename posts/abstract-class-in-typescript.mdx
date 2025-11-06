@@ -2,7 +2,7 @@
 title: "Abstract Class In Typescript"
 date: "2025-06-08"
 categories: "typescript"
-isDraft: true
+isDraft: false
 ---
 
 Abstract classess in Typescript are base classes that cannot be instantiated directly. They serve as blueprints for other classes to extend, providing a common structure and behavior.
@@ -13,6 +13,19 @@ Abstract classess in Typescript are base classes that cannot be instantiated dir
 - **Abstract methods**: Can contain abstract methods (without implementation) that **must be implemented** by subclasses.
 - **Concrete methods**: Can include concrete methods (with implementation) that subclasses can inherit and use.
 - **Properties**: Can have properties that subclasses can inherit. Also, Abstract classes can include properties with `abstract` modifier. If an abstract modifier is used, the property must be implemented by subclasses.
+
+## Example
+Lets we create an abstract class 
+
+```typescript
+abstract class MyAbstractClass {
+    abstract myAbstractMethod(): void // abstract method
+    myConcreteateMethod: void {
+        console.log("this concrete method")
+    }
+}
+
+```
 
 
 
