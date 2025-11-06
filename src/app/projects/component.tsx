@@ -83,7 +83,7 @@ export default function ProjectClients() {
       </div>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        {cardSelected !== null && (
+        {isOpen && cardSelected !== null && (
           <>
             <div className="h-[320px]">
               <Image
